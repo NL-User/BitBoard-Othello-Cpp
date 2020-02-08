@@ -6,7 +6,7 @@ using namespace std;
 
 const int kBoardSize = 8; // 何×何か
 const int kCellsCount = kBoardSize * kBoardSize;
-const bool kIs_Background_Black = true;
+const bool kIsBackgroundBlack = true;
 
 
 int Count_Bits(unsigned long long int bits) {
@@ -57,9 +57,9 @@ void Board::View() {
 		for (int j = 1; j <= kBoardSize; j++) {
 			printf(" ");
 			if (black_board >> (kBoardSize*i - j) & 0x1) {
-				printf((kIs_Background_Black) ? "〇" : "●");
+				printf((kIsBackgroundBlack) ? "〇" : "●");
 			} else if (white_board >> (kBoardSize*i - j) & 0x1) {
-				printf((kIs_Background_Black) ? "●" : "〇");
+				printf((kIsBackgroundBlack) ? "●" : "〇");
 			} else {
 				printf("－");
 			}
