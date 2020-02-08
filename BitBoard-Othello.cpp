@@ -6,11 +6,11 @@
 using namespace std;
 
 const int kBoardSize = 8; // 何×何か
-const int kCells_Count = kBoardSize * kBoardSize;
-const bool kIs_Background_Black = true;
+const int kCellsCount = kBoardSize * kBoardSize;
+const bool kIsBackgroundBlack = true;
 
 
-int Count_Bits(bitset<kCells_Count> bits) {
+int Count_Bits(bitset<kCellsCount> bits) {
 	//bits = (bits & 0x5555555555555555) + (bits >> 1 & 0x5555555555555555);
 	//bits = (bits & 0x3333333333333333) + (bits >> 2 & 0x3333333333333333);
 	//bits = (bits & 0x0f0f0f0f0f0f0f0f) + (bits >> 4 & 0x0f0f0f0f0f0f0f0f);
@@ -22,17 +22,17 @@ int Count_Bits(bitset<kCells_Count> bits) {
 
 class Board {
 public:
-	Board(bitset<kCells_Count>, bitset<kCells_Count>, bool);
+	Board(bitset<kCellsCount>, bitset<kCellsCount>, bool);
 	~Board();
 	void View();
 	int Get_Board_Piece_Count();
 
 private:
-	bitset<kCells_Count> black_board, white_board;
+	bitset<kCellsCount> black_board, white_board;
 	bool is_black_turn;
 };
 
-Board::Board(bitset<kCells_Count> black_ = 0, bitset<kCells_Count> white_ = 0, bool turn_ = true) {
+Board::Board(bitset<kCellsCount> black_ = 0, bitset<kCellsCount> white_ = 0, bool turn_ = true) {
 	if (black_ == 0 || white_ == 0) {
 		black_board = 0x0000000810000000;
 		white_board = 0x0000001008000000;
@@ -57,10 +57,10 @@ void Board::View() {
 		printf(" %d", kBoardSize - i + 1);
 		for (int j = 1; j <= kBoardSize; j++) {
 			printf(" ");
-			if ((black_board >> (kBoardSize*i - j) & bitset<kCells_Count>(0x1)) == 1) {
-				printf((kIs_Background_Black) ? "〇" : "●");
-			} else if ((white_board >> (kBoardSize*i - j) & bitset<kCells_Count>(0x1)) == 1) {
-				printf((kIs_Background_Black) ? "●" : "〇");
+			if (black_board >> (kBoardSize*i - j) & 0x1) {
+				printf((kIsBackgroundBlack) ? "〇" : "●");
+			} else if (white_board >> (kBoardSize*i - j) & 0x1) {
+				printf((kIsBackgroundBlack) ? "●" : "〇");
 			} else {
 				printf("－");
 			}
