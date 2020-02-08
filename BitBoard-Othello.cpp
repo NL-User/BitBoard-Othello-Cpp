@@ -57,9 +57,9 @@ void Board::View() {
 		printf(" %d", kBoardSize - i + 1);
 		for (int j = 1; j <= kBoardSize; j++) {
 			printf(" ");
-			if (black_board >> (kBoardSize*i - j) & 0x1) {
+			if ((black_board >> (kBoardSize*i - j) & bitset<kCellsCount>(0x1)) == 1) {
 				printf((kIsBackgroundBlack) ? "〇" : "●");
-			} else if (white_board >> (kBoardSize*i - j) & 0x1) {
+			} else if ((white_board >> (kBoardSize*i - j) & bitset<kCellsCount>(0x1)) == 1) {
 				printf((kIsBackgroundBlack) ? "●" : "〇");
 			} else {
 				printf("－");
@@ -71,7 +71,7 @@ void Board::View() {
 }
 
 int Board::Get_Board_Piece_Count() {
-	return black_board.count() + white_board.count();
+	return (int)black_board.count() + white_board.count();
 }
 
 
