@@ -10,7 +10,7 @@ const int kBoardSize = 8; // 何×何か
 const int kCellsCount = kBoardSize * kBoardSize;
 const bool kIsBackgroundBlack = true;
 
-using bit64 = bit64;
+using bit64 = bitset<kCellsCount>;
 
 int Count_Bits(unsigned long long int bits) {
 	/*bits = (bits & 0x5555555555555555) + (bits >> 1 & 0x5555555555555555);
