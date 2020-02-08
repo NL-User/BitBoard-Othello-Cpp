@@ -32,10 +32,13 @@ private:
 	bool is_black_turn;
 };
 
-Board::Board(bitset<kCells_Count> black_ = NULL, bitset<kCells_Count> white_ = NULL, bool turn_ = true) {
-	if (black_ == NULL || white_ == NULL) {
+Board::Board(bitset<kCells_Count> black_ = 0, bitset<kCells_Count> white_ = 0, bool turn_ = true) {
+	if (black_ == 0 || white_ == 0) {
 		black_board = 0x0000000810000000;
 		white_board = 0x0000001008000000;
+	} else {
+		black_board = black_;
+		white_board = white_;
 	}
 
 	is_black_turn = turn_;
