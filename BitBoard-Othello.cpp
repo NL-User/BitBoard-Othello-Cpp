@@ -9,9 +9,7 @@ const int kBoardSize = 8; // 何×何か
 const int kCellsCount = kBoardSize * kBoardSize;
 const bool kIsBackgroundBlack = true;
 
-using ull_int = unsigned long long int;
-
-int Count_Bits(ull_int bits) {
+int Count_Bits(size_t bits) {
 	bits = (bits & 0x5555555555555555) + (bits >> 1 & 0x5555555555555555);
 	bits = (bits & 0x3333333333333333) + (bits >> 2 & 0x3333333333333333);
 	bits = (bits & 0x0f0f0f0f0f0f0f0f) + (bits >> 4 & 0x0f0f0f0f0f0f0f0f);
@@ -23,19 +21,19 @@ int Count_Bits(ull_int bits) {
 
 class Board {
 public:
-	Board(ull_int, ull_int, bool);
+	Board(size_t, size_t, bool);
 	~Board();
 	void View();
 	int Get_Board_Piece_Count();
 
 private:
-	ull_int Get_Legal_Move();
+	size_t Get_Legal_Move();
 
-	ull_int black_board, white_board;
+	size_t black_board, white_board;
 	bool is_black_turn;
 };
 
-Board::Board(ull_int black_ = 0, ull_int white_ = 0, bool turn_ = true) {
+Board::Board(size_t black_ = 0, size_t white_ = 0, bool turn_ = true) {
 	if (black_ == 0 || white_ == 0) {
 		black_board = 0x0000000810000000;
 		white_board = 0x0000001008000000;
@@ -51,7 +49,7 @@ Board::~Board() {
 }
 
 void Board::View() {
-	ull_int ligal_move = Get_Legal_Move();
+	size_t ligal_move = Get_Legal_Move();
 
 	printf("%sのターン\n%dターン目\n\n  ", is_black_turn ? "黒" : "白", Get_Board_Piece_Count() - 3);
 	for (int i = 97; i < 105; i++) {
@@ -81,8 +79,8 @@ int Board::Get_Board_Piece_Count() {
 	return Count_Bits(black_board) + Count_Bits(white_board);
 }
 
-ull_int Board::Get_Legal_Move() {
-	ull_int player, opponent;
+size_t Board::Get_Legal_Move() {
+	size_t player, opponent;
 	if (is_black_turn) {
 		player = black_board;
 		opponent = white_board;
@@ -91,10 +89,10 @@ ull_int Board::Get_Legal_Move() {
 		opponent = white_board;
 	}
 
-	ull_int blank = ~(player | opponent);
+	size_t blank = ~(player | opponent);
 	
-	ull_int ligal_move = 0;
-	ull_int tmp, mask;
+	size_t ligal_move = 0;
+	size_t tmp, mask;
 
 	for (int i = 0; i < 2; i++) {
 		for (int d : {1, 7, 8, 9}) {
