@@ -146,5 +146,6 @@ int main() {
 
 	ofstream file("ull-int.txt", ios::app);
 	file << (int)chrono::duration_cast<chrono::milliseconds>(end_time - start_time).count() << ",";
+	delete board;
 	_getwch();
 }
