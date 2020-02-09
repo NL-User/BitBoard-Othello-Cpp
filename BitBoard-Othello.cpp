@@ -4,11 +4,12 @@
 #include <fstream>
 
 using namespace std;
-using ull_int = unsigned long long int;
 
 const int kBoardSize = 8; // 何×何か
 const int kCellsCount = kBoardSize * kBoardSize;
 const bool kIsBackgroundBlack = true;
+
+using ull_int = unsigned long long int;
 
 int Count_Bits(ull_int bits) {
 	bits = (bits & 0x5555555555555555) + (bits >> 1 & 0x5555555555555555);
