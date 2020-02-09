@@ -142,10 +142,10 @@ int main() {
 
 	end_time = chrono::system_clock::now();
 
-	printf("処理時間:%dミリ秒", (int)chrono::duration_cast<chrono::milliseconds>(end_time - start_time).count());
+	printf("処理時間:%dミリ秒\n\n", (int)chrono::duration_cast<chrono::milliseconds>(end_time - start_time).count());
 
 	ofstream file("ull-int.txt", ios::app);
 	file << (int)chrono::duration_cast<chrono::milliseconds>(end_time - start_time).count() << ",";
 	delete board;
-	_getwch();
+	//_getwch();
 }
